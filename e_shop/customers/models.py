@@ -39,4 +39,7 @@ class Address(models.Model):
     customer = models.ForeignKey(Customer, related_name='address', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.city
+        if self.street:
+            return '{}, {}'.format(self.street, self.city)
+        else:
+            return '{}, {}'.format(self.city, self.district)
