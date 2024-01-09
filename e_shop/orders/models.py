@@ -18,5 +18,5 @@ class Cart(models.Model):
 
 class CartItems(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
-    product = models.OneToOneField(Product, related_name='cart_item')
+    product = models.OneToOneField(Product, related_name='cart_item', on_delete=models.SET('Product temporarily not available !'))
     quantity = models.PositiveSmallIntegerField()

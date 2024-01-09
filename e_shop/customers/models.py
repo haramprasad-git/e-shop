@@ -32,10 +32,10 @@ class Customer(models.Model):
 
 # Data Model to store Customer Address.
 class Address(models.Model):
-    district = models.CharField(choice=DISTRICT_LIST, required=True)
-    city = models.CharField(max_length=500, required=True)
-    street = models.CharField(max_length=500)
-    building_no = models.CharField(max_length=20)
+    district = models.CharField(choices=DISTRICT_LIST, blank=False)
+    city = models.CharField(max_length=500, blank=False)
+    street = models.CharField(max_length=500, blank=True)
+    building_no = models.CharField(max_length=20, blank=True)
     customer = models.ForeignKey(Customer, related_name='address', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
