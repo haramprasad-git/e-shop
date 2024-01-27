@@ -6,6 +6,9 @@ class Category(models.Model):
     name = models.CharField(max_length=500)
     image = models.ImageField(upload_to='media/')
 
+    def __str__(self) -> str:
+        return self.name
+
 class Product(models.Model):
     DELETE_CHOICES = ((1, 'Live'), (0, 'Delete'))
     SPECIAL_CATEGORY_CHOICES = ((0, 'None'), (1, 'New Arrival'), (2, 'Great Discount'), (3, 'Flash Sale'), (4, 'Featured Product'))
