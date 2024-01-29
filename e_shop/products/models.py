@@ -11,7 +11,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     DELETE_CHOICES = ((1, 'Live'), (0, 'Delete'))
-    SPECIAL_CATEGORY_CHOICES = ((0, 'None'), (1, 'New Arrival'), (2, 'Great Discount'), (3, 'Flash Sale'), (4, 'Featured Product'))
+    SPECIAL_CATEGORY_CHOICES = ((0, 'None'), (1, 'New Arrival'), (2, 'Great Discount'), (3, 'Featured Product'))
 
     title = models.CharField(max_length=500)
     description = models.TextField()
@@ -26,3 +26,8 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    def __add__(self, other) -> int:
+        self_price = self.mrp * ((100-self.discount_percent) / 100)
+        other_price = other.mrp * ((100-other.discount_percent) / 100)
+        return self_price + other_price
