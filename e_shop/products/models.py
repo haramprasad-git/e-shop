@@ -11,8 +11,6 @@ class Category(models.Model):
 
 class Product(models.Model):
     DELETE_CHOICES = ((1, 'Live'), (0, 'Delete'))
-    SPECIAL_CATEGORY_CHOICES = ((0, 'None'), (1, 'New Arrival'), (2, 'Great Discount'), (3, 'Featured Product'))
-
     title = models.CharField(max_length=500)
     description = models.TextField()
     image = models.ImageField(upload_to='images/Products')
@@ -20,8 +18,8 @@ class Product(models.Model):
     discount_percent = models.FloatField(validators=[MaxValueValidator(100)])
     last_modification_date = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, related_name='products', on_delete=models.SET('Others'))
+    stock = models.IntegerField()
     priority = models.IntegerField()
-    special_category = models.IntegerField(choices=SPECIAL_CATEGORY_CHOICES, default=0)
     delete_status = models.IntegerField(choices=DELETE_CHOICES, default=1)
 
     def __str__(self) -> str:
