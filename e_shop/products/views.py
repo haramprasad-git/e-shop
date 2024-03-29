@@ -6,12 +6,12 @@ from django.core.paginator import Paginator
 def home(request):
     category = request.GET.get('ctg', default='')
     if category:
-        products = Product.objects.filter(category__name=category)
+        products = Product.objects.filter(category__id=category).order_by("priority")
     else:
         products = {
-            'new_arrival': Product.objects.filter(special_category=1, delete_status=1).order_by("-priority"),
-            'great_discount': Product.objects.filter(special_category=2, delete_status=1).order_by("-priority"),
-            'featured_products': Product.objects.filter(special_category=3, delete_status=1).order_by("-priority")
+            'new_arrival': Product.objects.filter(delete_status=1).order_by("-id", "priority")[:4],
+            'great_discount': Product.objects.filter(delete_status=1).order_by("-discount_percent", "priority")[:4],
+            'featured_products': Product.objects.filter(delete_status=1).order_by("priority")[:4]
         }
     response_data = {
         'banner_caption': {
