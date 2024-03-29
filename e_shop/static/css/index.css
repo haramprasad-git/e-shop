@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "Azonix";
+  src: url("../fonts/Azonix.otf");
+}
+@font-face {
+  font-family: "AmericanTypeWriter";
+  src: url("../fonts/American\ type\ writer.ttf");
+}
+
+img.lg-img {
+  width: 90%;
+  margin: 11px;
+  border-radius: 20px;
+}
+p.lg-p {
+  font-size: large;
+}
+.btn.btn-enhance:hover {
+  font-weight: 500;
+  transform: translateY(-1px);
+}
+.btn.btn-paginator {
+  background-color: white;
+  border: 2px solid #00d3d3;
+  width: 2em;
+  padding: 1px;
+  font-weight: 500;
+  border-radius: 0px;
+}
+.btn.btn-paginator:hover {
+  background-color: #00f2f2;
+}
+#main-content {
+  margin-top: 60px;
+}
+.animefashion-logo.logo {
+  color: aqua;
+  font-family: "Azonix";
+}
+.hover-push:hover {
+  transform: translateY(-3px);
+}

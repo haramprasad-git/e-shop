@@ -4,7 +4,7 @@ from django.core.validators import MaxValueValidator
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=500)
-    image = models.ImageField(upload_to='media/')
+    image = models.ImageField(upload_to='images/Categry')
 
     def __str__(self) -> str:
         return self.name
@@ -15,7 +15,7 @@ class Product(models.Model):
 
     title = models.CharField(max_length=500)
     description = models.TextField()
-    image = models.ImageField(upload_to='media/')
+    image = models.ImageField(upload_to='images/Products')
     mrp = models.FloatField()
     discount_percent = models.FloatField(validators=[MaxValueValidator(100)])
     last_modification_date = models.DateTimeField(auto_now=True)

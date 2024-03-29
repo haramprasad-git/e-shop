@@ -1,0 +1,112 @@
+{% extends "index.html" %}
+{% load discount_price_calc %}
+
+{% block title %}
+AnimeFashion | Enhance your dressing style with attractive Anime clothings and accessories
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div id="Banners" class="carousel slide carousel-dark" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button class="active" type="button" data-bs-target="#Banners" data-bs-slide-to="0" aria-current="true" area-label="Banner 1"></button>
+        <button type="button" data-bs-target="#Banners" data-bs-slide-to="1" aria-label="Banner 2"></button>
+        <button type="button" data-bs-target="#Banners" data-bs-slide-to="2" aria-label="Banner 3"></button>
+      </div>
+      <div class="carousel-inner bg-light" style="height: 200px;">
+        <div class="carousel-item active">
+          <img src="#" alt="{{banner_caption.slide1}}" title="{{banner_caption.slide1}}">
+        </div>
+        <div class="carousel-item">
+          <img src="#" alt="{{banner_caption.slide2}}" title="{{banner_caption.slide2}}">
+        </div>
+        <div class="carousel-item">
+          <img src="#" alt="{{banner_caption.slide3}}" title="{{banner_caption.slide3}}">
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#Banners" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#Banners" data-bs-slide="next">
+        <span class="carousel-control-next-icon" area-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+</div>
+
+<!-- Featured Products -->
+{% if products.featured_products %}
+<div id="featuredProducts" class="row mt-5 ps-4">
+    <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Featured Products</h3>
+    {% for product in products.featured_products %}
+        <a href="{% url 'details' product.id %}" class="hover-push col-sm-6 col-md-3 col-lg-2 my-1 text-dark" style="text-decoration: none;">
+            <div class="card" style="width: 12rem;">
+                <img src="{{product.image.url}}" class="card-img-top" alt="Product image" style="height: 10rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.title}}</h5>
+                    <h6 claas="card-subtitle">
+                        <span class="text-success fw-bold">&#8377 {{ product.mrp|discount_price_calc:product.discount_percent }} &emsp; </span>
+                        <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
+                    </h6>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- New Arrival -->
+{% if products.new_arrival %}
+<div id="newArrival" class="row mt-5 ps-4">
+  <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >New Arrival</h3>
+  {% for product in products.new_arrival %}
+      <a href="{% url 'details' product.id %}" class="hover-push col-sm-6 col-md-3 col-lg-2 my-1 text-dark" style="text-decoration: none;">
+          <div class="card" style="width: 12rem;">
+              <img src="{{product.image.url}}" class="card-img-top" alt="Product image" style="height: 10rem;">
+              <div class="card-body">
+                  <h5 class="card-title">{{product.title}}</h5>
+                  <h6 claas="card-subtitle">
+                      <span class="text-success fw-bold">&#8377 {{ product.mrp|discount_price_calc:product.discount_percent }} &emsp; </span>
+                      <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
+                  </h6>
+              </div>
+          </div>
+      </a>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- Great Discount -->
+{% if products.great_discount %}
+<div id="greatDiscount" class="row mt-5 ps-4">
+  <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Great Discount</h3>
+  {% for product in products.great_discount %}
+      <a href="{% url 'details' product.id %}" class="hover-push col-sm-6 col-md-3 col-lg-2 my-1 p-0 text-dark" style="text-decoration: none; padding: 0px;">
+          <div class="card" style="width: 12rem;">
+              <img src="{{product.image.url}}" class="card-img-top" alt="Product image" style="height: 10rem;">
+              <div class="card-body">
+                  <h5 class="card-title">{{product.title}}</h5>
+                  <h6 claas="card-subtitle">
+                      <span class="text-success fw-bold">&#8377 {{ product.mrp|discount_price_calc:product.discount_percent }} &emsp; </span>
+                      <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
+                  </h6>
+              </div>
+          </div>
+      </a>
+  {% endfor %}
+</div>
+{% endif %}
+<div id="categories" class="row mt-5 ps-4">
+  <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Categories</h3>
+  {% for category in categories %}
+      <a href="{% url 'products_in_category' category.id %}" class="hover-push col-sm-6 col-md-3 col-lg-2 my-1 p-0 text-dark" style="text-decoration: none; padding: 0px;">
+          <div class="card" style="width: 10rem;">
+              <img src="{{category.image.url}}" class="card-img-top" alt="Category image" style="height: 8rem;">
+              <div class="card-body">
+                  <h5 class="card-title">{{category.name}}</h5>
+              </div>
+          </div>
+      </a>
+  {% endfor %}
+</div>
+{% endblock content %}

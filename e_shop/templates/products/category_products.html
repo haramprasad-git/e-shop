@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% load discount_price_calc %}
+
+{% block title %}
+AnimeFashion | {{ products.0.category }}
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <h2 class="m-3">{{ products.0.category }}</h2>
+        {% for product in products %}
+        <a href="{% url 'details' product.id %}" class="hover-push col-sm-6 col-md-3 col-lg-2 my-1 p-0 text-dark" style="text-decoration: none; padding: 0px;">
+            <div class="card" style="width: 12rem;">
+                <img src="{{product.image.url}}" class="card-img-top" alt="Product image" style="height: 10rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.title}}</h5>
+                    <h6 claas="card-subtitle">
+                        <span class="text-success fw-bold">&#8377 {{ product.mrp|discount_price_calc:product.discount_percent }} &emsp; </span>
+                        <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
+                    </h6>
+                </div>
+            </div>
+        </a>
+        {% empty %}
+        <div class="alert alert-warning">
+            <p>Products are not available in {{ products.0.category }} category ! <a href="{% url 'home' %}">Go to Home page</a></p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="d-flex justify-content-center">
+        {% for page_no in products.paginator.page_range %}
+        <a href="?pg={{page_no}}" class="btn btn-paginator m-2">{{page_no}}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

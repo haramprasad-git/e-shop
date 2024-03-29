@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block title %}
+AnimeFashion | {{ product }}
+{% endblock title %}
+
+{% block content %}
+<div class="row container-fluid">
+    <div class="col-md-4 ">
+        <img src="{{product.image.url}}" alt="{{product}}" class="lg-img">
+    </div>
+    <div class="col-md-8">
+        <h2>{{ product }}</h2>
+        <p class="lg-p">{{ product.description }}</p>
+        <div class="m-2">
+            <a class="btn btn-dark btn-enhance col-md-4" href="#">Add to cart</a>
+            <a class="btn btn-primary btn-enhance col-md-4" href="#">Buy now</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
