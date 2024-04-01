@@ -19,7 +19,6 @@ class Category(models.Model):
 
 class Product(models.Model):
     DELETE_CHOICES = ((1, 'Live'), (0, 'Delete'))
-
     title = models.CharField(max_length=500)
     description = models.TextField()
     image = models.ImageField(upload_to='images/Products')
