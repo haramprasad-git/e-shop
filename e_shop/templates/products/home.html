@@ -33,9 +33,8 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
       </button>
     </div>
 </div>
-
-<!-- Featured Products -->
 {% if products.featured_products %}
+<!-- Featured Products -->
 <div id="featuredProducts" class="row mt-5 ps-4">
     <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Featured Products</h3>
     {% for product in products.featured_products %}
@@ -45,7 +44,7 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
                 <div class="card-body">
                     <h5 class="card-title">{{product.title}}</h5>
                     <h6 claas="card-subtitle">
-                        <span class="text-success fw-bold">&#8377 {{ product.mrp|discount_price_calc:product.discount_percent }} &emsp; </span>
+                        <span class="text-success fw-bold">&#8377 {{ product|discount_price_calc }} &emsp; </span>
                         <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
                     </h6>
                 </div>
@@ -53,10 +52,8 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
         </a>
     {% endfor %}
 </div>
-{% endif %}
 
 <!-- New Arrival -->
-{% if products.new_arrival %}
 <div id="newArrival" class="row mt-5 ps-4">
   <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >New Arrival</h3>
   {% for product in products.new_arrival %}
@@ -66,7 +63,7 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
               <div class="card-body">
                   <h5 class="card-title">{{product.title}}</h5>
                   <h6 claas="card-subtitle">
-                      <span class="text-success fw-bold">&#8377 {{ product.mrp|discount_price_calc:product.discount_percent }} &emsp; </span>
+                      <span class="text-success fw-bold">&#8377 {{ product|discount_price_calc }} &emsp; </span>
                       <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
                   </h6>
               </div>
@@ -74,10 +71,8 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
       </a>
   {% endfor %}
 </div>
-{% endif %}
 
 <!-- Great Discount -->
-{% if products.great_discount %}
 <div id="greatDiscount" class="row mt-5 ps-4">
   <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Great Discount</h3>
   {% for product in products.great_discount %}
@@ -87,7 +82,7 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
               <div class="card-body">
                   <h5 class="card-title">{{product.title}}</h5>
                   <h6 claas="card-subtitle">
-                      <span class="text-success fw-bold">&#8377 {{ product.mrp|discount_price_calc:product.discount_percent }} &emsp; </span>
+                      <span class="text-success fw-bold">&#8377 {{ product|discount_price_calc }} &emsp; </span>
                       <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
                   </h6>
               </div>
@@ -95,7 +90,7 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
       </a>
   {% endfor %}
 </div>
-{% endif %}
+
 <div id="categories" class="row mt-5 ps-4">
   <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Categories</h3>
   {% for category in categories %}
@@ -109,4 +104,7 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
       </a>
   {% endfor %}
 </div>
+{% else %}
+<h3 class="alert alert-info">Currently no products added !</h3>
+{% endif %}
 {% endblock content %}

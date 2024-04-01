@@ -1,3 +1,6 @@
+body {
+  margin-left: 10px;
+}
 @font-face {
   font-family: "Azonix";
   src: url("../fonts/Azonix.otf");
@@ -39,4 +42,17 @@ p.lg-p {
 }
 .hover-push:hover {
   transform: translateY(-3px);
+}
+
+.input {
+  margin: 0.5em 0em;
+  border: 2px solid black;
+  border-radius: 5px;
+  height: 2em;
+}
+.input:focus {
+  border-color: blue;
+}
+.input.input-small-number{
+  width: 6em;
 }

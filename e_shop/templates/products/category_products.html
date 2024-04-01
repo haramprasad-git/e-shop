@@ -16,7 +16,7 @@ AnimeFashion | {{ products.0.category }}
                 <div class="card-body">
                     <h5 class="card-title">{{product.title}}</h5>
                     <h6 claas="card-subtitle">
-                        <span class="text-success fw-bold">&#8377 {{ product.mrp|discount_price_calc:product.discount_percent }} &emsp; </span>
+                        <span class="text-success fw-bold">&#8377 {{ product|discount_price_calc }} &emsp; </span>
                         <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
                     </h6>
                 </div>
