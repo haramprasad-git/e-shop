@@ -38,11 +38,23 @@ class Product(models.Model):
         other_price = other.mrp * ((100-other.discount_percent) / 100)
         return self_price + other_price
     
+    def is_available(self) -> bool:
+        for size in self.product_size.all():
+            if size.stock > 0:
+                return True
+        return False
+    
+    def selling_price(self) -> float:
+        return self.mrp * ((100-self.discount_percent) / 100)
+    
 class ProductSize(models.Model):
-    product = models.ForeignKey(Product, related_name='avilable_sizes', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='product_size', on_delete=models.CASCADE)
     size = models.ForeignKey(Size, related_name='available_products', on_delete=models.CASCADE)
     stock = models.IntegerField()
     age_limit = models.CharField(blank=True, default='Not Given !')
 
     def __str__(self) -> str:
         return str(self.size) + ' ' + str(self.product)
+    
+    def is_available(self) -> bool:
+        return True if self.stock > 0 else False

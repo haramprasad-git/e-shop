@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %}
+Login | Signup
+{% endblock title %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/signup-login.css' %}">
+{% endblock links %}
+
+{% block content %}
+<div class="cont_principal">
+    <div class="cont_centrar">
+        <div class="cont_login">
+            <form method="post">
+                {% csrf_token %}
+                <div class="cont_tabs_login">
+                    <ul class='ul_tabs'>
+                        <li class="active">
+                            <a href="#" onclick="log_in()">LOG IN</a>
+                            <span class="linea_bajo_nom"></span>
+                        </li>
+                        <li>
+                            <a href="#up" onclick="sign_up()">SIGN UP</a>
+                            <span class="linea_bajo_nom"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="cont_text_inputs">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <span class="alert alert-sm alert-danger">{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                    <input type="text" class="input_form_sign signup_req" placeholder="NAME" name="name" />
+                    <input type="email" required class="input_form_sign d_block active_inp" placeholder="EMAIL" name="email" />
+                    <input type="text" class="input_form_sign signup_req" placeholder="PHONE" name="phone" />
+                    <input type="password" required class="input_form_sign d_block  active_inp" placeholder="PASSWORD" name="password" />
+                    <input type="hidden" name="action" value="login">
+    
+                    <a href="#" class="link_forgot_pass d_block" >Forgot Password ?</a>    
+                </div>
+                <div class="cont_btn">
+                    <button class="btn_sign">LOG IN</button>
+                </div>  
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/signup-login.js' %}"></script>
+{% endblock content %}

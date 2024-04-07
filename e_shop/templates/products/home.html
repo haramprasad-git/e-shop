@@ -1,9 +1,12 @@
 {% extends "index.html" %}
-{% load discount_price_calc %}
 
 {% block title %}
 AnimeFashion | Enhance your dressing style with attractive Anime clothings and accessories
 {% endblock title %}
+
+{% block nav-home %}
+    <a class="nav-link active" aria-current="page" href="{% url 'home'%}">Home</a>
+{% endblock nav-home %}
 
 {% block content %}
 <div class="row">
@@ -44,7 +47,7 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
                 <div class="card-body">
                     <h5 class="card-title">{{product.title}}</h5>
                     <h6 claas="card-subtitle">
-                        <span class="text-success fw-bold">&#8377 {{ product|discount_price_calc }} &emsp; </span>
+                        <span class="text-success fw-bold">&#8377 {{ product.selling_price }} &emsp; </span>
                         <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
                     </h6>
                 </div>
@@ -63,7 +66,7 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
               <div class="card-body">
                   <h5 class="card-title">{{product.title}}</h5>
                   <h6 claas="card-subtitle">
-                      <span class="text-success fw-bold">&#8377 {{ product|discount_price_calc }} &emsp; </span>
+                      <span class="text-success fw-bold">&#8377 {{ product.selling_price }} &emsp; </span>
                       <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
                   </h6>
               </div>
@@ -82,7 +85,7 @@ AnimeFashion | Enhance your dressing style with attractive Anime clothings and a
               <div class="card-body">
                   <h5 class="card-title">{{product.title}}</h5>
                   <h6 claas="card-subtitle">
-                      <span class="text-success fw-bold">&#8377 {{ product|discount_price_calc }} &emsp; </span>
+                      <span class="text-success fw-bold">&#8377 {{ product.selling_price }} &emsp; </span>
                       <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
                   </h6>
               </div>

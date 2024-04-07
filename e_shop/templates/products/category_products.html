@@ -1,5 +1,4 @@
 {% extends "index.html" %}
-{% load discount_price_calc %}
 
 {% block title %}
 AnimeFashion | {{ products.0.category }}
@@ -16,14 +15,14 @@ AnimeFashion | {{ products.0.category }}
                 <div class="card-body">
                     <h5 class="card-title">{{product.title}}</h5>
                     <h6 claas="card-subtitle">
-                        <span class="text-success fw-bold">&#8377 {{ product|discount_price_calc }} &emsp; </span>
+                        <span class="text-success fw-bold">&#8377 {{ product.selling_price }} &emsp; </span>
                         <del class="text-danger fw-bold">&#8377 {{ product.mrp }}</del>
                     </h6>
                 </div>
             </div>
         </a>
         {% empty %}
-        <div class="alert alert-warning">
+        <div class="alert alert-sm alert-warning">
             <p>Products are not available in {{ products.0.category }} category ! <a href="{% url 'home' %}">Go to Home page</a></p>
         </div>
         {% endfor %}

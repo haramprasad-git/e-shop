@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+
+{% block title %}
+Add Address
+{% endblock title %}
+
+{% block nav-add-address %}
+    <a href="{% url 'add-address' %}" class="nav-link active if_authenticated">Add Address</a>
+{% endblock nav-add-address %}
+
+{% block content %}
+<div class="form-bg row">
+    <div class="form-container col-md-5 m-auto">
+    {% if addresses %}
+        <ul>
+            {% for address in addresses.all %}
+                <li>
+                    {{ address.building_no }},
+                    {% if address.street %}
+                        {{ address.street }},
+                    {% endif %}
+                    {{ address.city }},
+                    {{ address.district }}
+                    &emsp;&emsp;
+                    <a href="?del={{address.id}}" role="button" class="btn btn-sm btn-outline-danger" title="delete address">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </li><br>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <span class="alert alert-lg alert-danger">No addresses added !</span>
+        <script>
+            var cont = document.getElementsByClassName('form-container')[0]
+            cont.style.display = 'flex'
+            cont.style.alignItems = 'center'
+            document.getElementsByClassName('alert')[0].style.width = '-webkit-fill-available'
+        </script>
+    {% endif %}
+    </div>
+    <div class="form-container col-md-4 m-auto">
+        <form method="post">
+                {% csrf_token %}
+            <h3 class="form-head">ADD ADDRESS</h3>
+            {% if messages %}
+                {% for message in messages %}
+                    <span class="alert alert-sm alert-danger">{{ message }}</span>
+                {% endfor %}
+            {% endif %}
+            <div class="form-group mb-2">
+                <label class="form-label">District : </label>
+                <select name="district" class="form-select">
+                    <option selected disabled value="">Select District</option>
+                    {% for district in districts %}
+                        <option value="{{district}}">{{ district }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">City : </label>
+                <input type="text" name="city"  class="form-control" required />
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Street (optional) : </label>
+                <input type="text" name="street" class="form-control" />
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Building No :</label>
+                <input type="text" name="building" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-outline-primary">Add</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

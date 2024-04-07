@@ -1,5 +1,4 @@
 {% extends "index.html" %}
-{% load discount_price_calc %}
 
 {% block title %}
 AnimeFashion | {{ product }}
@@ -13,27 +12,39 @@ AnimeFashion | {{ product }}
     <div class="col-md-8">
         <h5>{{ product.category }}</h5>
         <h1>{{ product }}</h1>
-        <span style="font-size: 1.5rem; font-weight: bold;">&#8377 {{ product|discount_price_calc }} &nbsp; </span>
+        <span style="font-size: 1.5rem; font-weight: bold;">&#8377 {{ product.selling_price }} &nbsp; </span>
         <del><span>&#8377 {{ product.mrp }}</span></del>
         <span style="color: green; font-weight: 500;">&emsp; {{ product.discount_percent }}% off</span>
         <p class="lg-p">{{ product.description }}</p>
 
-        <form action="" method="post" class="if_available">
-                {% csrf_token %}
-            <input type="hidden" name="product" value="{{ product.id }}">
-            {% for product_size in product.avilable_sizes.all %}
-                {% if product_size.stock > 0 %}
-                    <input type="radio" name="size" value="{{product_size.size}}">
-                    <label for="size">{{ product_size.size }} &emsp; </label>
-                {% endif %}
-            {% endfor %}
-            <br><input class="input input-small-number" type="number" name="quantity">
-        </form>
+        {% if product.is_available %}
+            <form action="" method="post">
+                    {% csrf_token %}
+                <input type="hidden" name="product" value="{{ product.id }}">
+                {% for product_size in product.product_size.all %}
+                    <div class="form-check-inline">
+                        {% if product_size.is_available %}
+                            <input type="radio" class="form-check-input" name="size" value="{{product_size.size}}">
+                        {% else %}
+                            <input type="radio" disabled class="form-check-input" name="size" value="{{product_size.size}}">
+                        {% endif %}
+                        <label class="form-check-label" for="{{product_size.size}}">{{ product_size.size }} &emsp; </label>
+                    </div>
+                {% endfor %}
+                <br>
+                <div class="form-group">
+                    <label for="quantity">Quantity : </label>
+                    <input class="form-control input-small-number" type="number" name="quantity">
+                </div>
+            </form>
 
-        <div class="m-2">
-            <a class="btn btn-dark btn-enhance col-md-4" href="#">Add to cart</a>
-            <a class="btn btn-primary btn-enhance col-md-4" href="#">Buy now</a>
-        </div>
+            <div class="m-3">
+                <a class="btn btn-dark btn-enhance col-lg-4" href="#">Add to cart</a>
+                <a class="btn btn-primary btn-enhance col-lg-4" href="#">Buy now</a>
+            </div>
+        {% else %}
+        <span class="alert alert-sm alert-danger">Out of Stock !</span>
+        {% endif %}
     </div>
 </div>
 {% endblock content %}
